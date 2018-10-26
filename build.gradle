@@ -1,0 +1,36 @@
+defaultTasks 'clean', 'build'
+
+buildscript {
+    ext {
+        kotlinVersion = '1.2.10'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    }
+}
+
+apply from: "$rootDir/dependencies.gradle"
+apply plugin: 'kotlin'
+
+group = "org.acmebank.katas.organisation"
+jar {
+    baseName = 'organisation-kata'
+    version = '1.0.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile libs.kotlin
+
+    testImplementation libs.test.junitApi,
+            libs.test.assertj
+
+    testRuntimeOnly libs.test.junitEngine
+}
+

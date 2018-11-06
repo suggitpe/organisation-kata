@@ -2,22 +2,22 @@ package org.suggs.katas.organisation
 
 import org.suggs.katas.organisation.domain.Person
 
-class EmptyTreeNode : TreeNode {
+class EmptyTreeNode(private val valueNode: Person) : TreeNode {
 
     override fun parent(): TreeNode? {
         return null
     }
 
     override fun value(): Person {
-        return Person("", "")
+        return valueNode
     }
 
     override fun children(): List<TreeNode> {
         return ArrayList()
     }
 
-    override fun insert(personToAdd: Person): TreeNode {
-        return PopulatedTreeNode(personToAdd, null)
+    override fun insert(toAdd: Person): TreeNode {
+        return PopulatedTreeNode(toAdd, null)
     }
 
     override fun findInTree(name: String): TreeNode? {

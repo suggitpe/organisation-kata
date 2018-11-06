@@ -2,7 +2,9 @@ package org.suggs.katas.organisation
 
 import org.suggs.katas.organisation.domain.Person
 
-class PopulatedTreeNode(val valueNode: Person, var parentNode: TreeNode?, var childrenNodes: List<TreeNode> = ArrayList()) : TreeNode {
+class PopulatedTreeNode(private val valueNode: Person,
+                        private var parentNode: TreeNode?,
+                        private var childrenNodes: List<TreeNode> = ArrayList()) : TreeNode {
 
     override fun parent(): TreeNode? {
         return parentNode
@@ -16,11 +18,11 @@ class PopulatedTreeNode(val valueNode: Person, var parentNode: TreeNode?, var ch
         return childrenNodes
     }
 
-    override fun insert(personToAdd: Person): TreeNode {
+    override fun insert(toAdd: Person): TreeNode {
         when {
-            valueNode.manager == personToAdd.name -> return placeAtTheTopOfTheTree(personToAdd)
-            personToAdd.manager == valueNode.name -> return addToTheChildren(personToAdd)
-            else -> childrenNodes.forEach { it -> it.insert(personToAdd) }
+            valueNode.manager == toAdd.name -> return placeAtTheTopOfTheTree(toAdd)
+            toAdd.manager == valueNode.name -> return addToTheChildren(toAdd)
+            else -> childrenNodes.forEach { it -> it.insert(toAdd) }
         }
         return this
     }

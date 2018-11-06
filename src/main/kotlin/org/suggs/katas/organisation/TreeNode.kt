@@ -10,7 +10,7 @@ interface TreeNode {
 
     fun children(): List<TreeNode>
 
-    fun insert(personToAdd: Person): TreeNode
+    fun insert(toAdd: Person): TreeNode
 
     fun treeCount(): Int
 

@@ -6,7 +6,7 @@ class TreeBuilder {
 
 
     fun buildOrganisationTreeFrom(staff: List<Person>): TreeNode {
-        return buildOrganisationTreeFrom(staff, EmptyTreeNode())
+        return buildOrganisationTreeFrom(staff, EmptyTreeNode(Person("", "")))
     }
 
     private fun buildOrganisationTreeFrom(staff: List<Person>, node: TreeNode): TreeNode {

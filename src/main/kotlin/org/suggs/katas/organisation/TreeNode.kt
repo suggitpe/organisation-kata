@@ -1,18 +1,18 @@
 package org.suggs.katas.organisation
 
-import org.suggs.katas.organisation.domain.Person
+interface TreeNode<T> {
 
-interface TreeNode {
+    fun isEmpty(): Boolean
 
-    fun parent(): TreeNode?
+    fun parent(): TreeNode<T>?
 
-    fun value(): Person
+    fun value(): T
 
-    fun children(): List<TreeNode>
+    fun children(): List<TreeNode<T>>
 
-    fun insert(toAdd: Person, checkIfInsertIsManagerOf: (Person) -> Boolean, checkIfInsertIsChildOf: (Person) -> Boolean): TreeNode
+    fun insert(toAdd: T, checkIfInsertIsManagerOf: (T) -> Boolean, checkIfInsertIsChildOf: (T) -> Boolean): TreeNode<T>
 
     fun treeCount(): Int
 
-    fun findInTree(checkName: (Person) -> Boolean): TreeNode?
+    fun findInTree(checkName: (T) -> Boolean): TreeNode<T>?
 }

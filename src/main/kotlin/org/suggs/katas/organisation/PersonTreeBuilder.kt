@@ -2,14 +2,14 @@ package org.suggs.katas.organisation
 
 import org.suggs.katas.organisation.domain.Person
 
-class TreeBuilder {
+class PersonTreeBuilder {
 
 
-    fun buildOrganisationTreeFrom(staff: List<Person>): TreeNode {
+    fun buildOrganisationTreeFrom(staff: List<Person>): TreeNode<Person> {
         return buildOrganisationTreeFrom(staff, EmptyTreeNode(Person("", "")))
     }
 
-    private fun buildOrganisationTreeFrom(staff: List<Person>, node: TreeNode): TreeNode {
+    private fun buildOrganisationTreeFrom(staff: List<Person>, node: TreeNode<Person>): TreeNode<Person> {
         return when {
             staff.isEmpty() -> node
             else -> {

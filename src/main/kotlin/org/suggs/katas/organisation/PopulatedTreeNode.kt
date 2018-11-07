@@ -1,24 +1,24 @@
 package org.suggs.katas.organisation
 
-import org.suggs.katas.organisation.domain.Person
+class PopulatedTreeNode<T>(private val valueNode: T,
+                        private var parentNode: TreeNode<T>?,
+                        private var childrenNodes: List<TreeNode<T>> = ArrayList()) : TreeNode<T> {
 
-class PopulatedTreeNode(private val valueNode: Person,
-                        private var parentNode: TreeNode?,
-                        private var childrenNodes: List<TreeNode> = ArrayList()) : TreeNode {
+    override fun isEmpty(): Boolean = false
 
-    override fun parent(): TreeNode? {
+    override fun parent(): TreeNode<T>? {
         return parentNode
     }
 
-    override fun value(): Person {
+    override fun value(): T {
         return valueNode
     }
 
-    override fun children(): List<TreeNode> {
+    override fun children(): List<TreeNode<T>> {
         return childrenNodes
     }
 
-    override fun insert(toAdd: Person, checkIfInsertIsManagerOf: (Person) -> Boolean, checkIfInsertIsChildOf: (Person) -> Boolean): TreeNode {
+    override fun insert(toAdd: T, checkIfInsertIsManagerOf: (T) -> Boolean, checkIfInsertIsChildOf: (T) -> Boolean): TreeNode<T> {
         when {
             checkIfInsertIsManagerOf(valueNode) -> return placeAtTheTopOfTheTree(toAdd)
             checkIfInsertIsChildOf(valueNode) -> return addToTheChildren(toAdd)
@@ -27,19 +27,19 @@ class PopulatedTreeNode(private val valueNode: Person,
         return this
     }
 
-    private fun placeAtTheTopOfTheTree(toAdd: Person): TreeNode {
+    private fun placeAtTheTopOfTheTree(toAdd: T): TreeNode<T> {
         val newTreeHead = PopulatedTreeNode(toAdd, null)
         newTreeHead.childrenNodes += this
         this.parentNode = newTreeHead
         return newTreeHead
     }
 
-    private fun addToTheChildren(toAdd: Person): TreeNode {
+    private fun addToTheChildren(toAdd: T): TreeNode<T> {
         childrenNodes += PopulatedTreeNode(toAdd, this)
         return this
     }
 
-    override fun findInTree(checkName: (Person) -> Boolean): TreeNode? {
+    override fun findInTree(checkName: (T) -> Boolean): TreeNode<T>? {
         return when {
             checkName(valueNode) -> this
             childrenNodes.isEmpty() -> null

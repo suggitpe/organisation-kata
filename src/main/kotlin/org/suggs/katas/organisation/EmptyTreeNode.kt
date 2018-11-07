@@ -1,26 +1,26 @@
 package org.suggs.katas.organisation
 
-import org.suggs.katas.organisation.domain.Person
+class EmptyTreeNode<T>(private val value: T) : TreeNode<T> {
 
-class EmptyTreeNode(private val value: Person) : TreeNode {
+    override fun isEmpty(): Boolean = true
 
-    override fun parent(): TreeNode? {
+    override fun parent(): TreeNode<T>? {
         return null
     }
 
-    override fun value(): Person {
+    override fun value(): T {
         return value
     }
 
-    override fun children(): List<TreeNode> {
+    override fun children(): List<TreeNode<T>> {
         return ArrayList()
     }
 
-    override fun insert(toAdd: Person, checkIfInsertIsManagerOf: (Person) -> Boolean, checkIfInsertIsChildOf: (Person) -> Boolean): TreeNode {
+    override fun insert(toAdd: T, checkIfInsertIsManagerOf: (T) -> Boolean, checkIfInsertIsChildOf: (T) -> Boolean): TreeNode<T> {
         return PopulatedTreeNode(toAdd, null)
     }
 
-    override fun findInTree(checkName: (Person) -> Boolean): TreeNode? {
+    override fun findInTree(checkName: (T) -> Boolean): TreeNode<T>? {
         return null
     }
 

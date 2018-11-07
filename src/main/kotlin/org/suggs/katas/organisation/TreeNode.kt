@@ -10,9 +10,9 @@ interface TreeNode {
 
     fun children(): List<TreeNode>
 
-    fun insert(toAdd: Person): TreeNode
+    fun insert(toAdd: Person, checkIfInsertIsManagerOf: (Person) -> Boolean, checkIfInsertIsChildOf: (Person) -> Boolean): TreeNode
 
     fun treeCount(): Int
 
-    fun findInTree(name: String): TreeNode?
+    fun findInTree(checkName: (Person) -> Boolean): TreeNode?
 }

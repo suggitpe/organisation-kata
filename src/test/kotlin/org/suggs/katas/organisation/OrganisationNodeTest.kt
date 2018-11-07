@@ -55,32 +55,38 @@ class OrganisationNodeTest {
     }
 
     @Test
+    fun `returns null if it cannot find someone`(){
+        val tree = TreeBuilder().buildOrganisationTreeFrom(listOf(pete))
+        assertThat(tree.findInTree { it -> it.name == jack.name }).isNull()
+    }
+
+    @Test
     fun `can find someone in a tree with a depth of 1`() {
         val tree = TreeBuilder().buildOrganisationTreeFrom(listOf(pete))
-        assertThat(tree.findInTree(pete.name)).isNotNull
+        assertThat(tree.findInTree { it -> it.name == pete.name }).isNotNull
     }
 
     @Test
     fun `can find someone in a tree with a depth of 2`() {
         val tree = TreeBuilder().buildOrganisationTreeFrom(listOf(pete, jack))
-        assertThat(tree.findInTree(jack.name)).isNotNull
+        assertThat(tree.findInTree { it -> it.name == jack.name }).isNotNull
     }
 
     @Test
     fun `can find someone in a tree with a depth of 3`() {
         val tree = TreeBuilder().buildOrganisationTreeFrom(listOf(pete, dale, bert))
-        assertThat(tree.findInTree(bert.name)).isNotNull
+        assertThat(tree.findInTree { it -> it.name == bert.name }).isNotNull
     }
 
     @Test
     fun `can find someone in a deeply nested tree`() {
         val tree = TreeBuilder().buildOrganisationTreeFrom(listOf(pete, jack, dale, bert, josh))
         assertAll("Should find people in the tree",
-                Executable { assertThat(tree.findInTree(pete.name)).`as`("pete not found").isNotNull },
-                Executable { assertThat(tree.findInTree(jack.name)).`as`("jack not found").isNotNull },
-                Executable { assertThat(tree.findInTree(dale.name)).`as`("dale not found").isNotNull },
-                Executable { assertThat(tree.findInTree(bert.name)).`as`("bert not found").isNotNull },
-                Executable { assertThat(tree.findInTree(josh.name)).`as`("josh not found").isNotNull }
+                Executable { assertThat(tree.findInTree { it -> it.name == pete.name }).`as`("pete not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == jack.name }).`as`("jack not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == dale.name }).`as`("dale not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == bert.name }).`as`("bert not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == josh.name }).`as`("josh not found").isNotNull }
         )
     }
 }

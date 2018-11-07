@@ -12,7 +12,10 @@ class TreeBuilder {
     private fun buildOrganisationTreeFrom(staff: List<Person>, node: TreeNode): TreeNode {
         return when {
             staff.isEmpty() -> node
-            else -> buildOrganisationTreeFrom(staff.drop(1), node.insert(staff.first()))
+            else -> {
+                val toAdd = staff.first()
+                buildOrganisationTreeFrom(staff.drop(1), node.insert(toAdd, { it -> it.manager == toAdd.name }, { it -> it.name == toAdd.manager }))
+            }
         }
     }
 

@@ -18,11 +18,11 @@ class PopulatedTreeNode(private val valueNode: Person,
         return childrenNodes
     }
 
-    override fun insert(toAdd: Person): TreeNode {
+    override fun insert(toAdd: Person, checkIfInsertIsManagerOf: (Person) -> Boolean, checkIfInsertIsChildOf: (Person) -> Boolean): TreeNode {
         when {
-            valueNode.manager == toAdd.name -> return placeAtTheTopOfTheTree(toAdd)
-            toAdd.manager == valueNode.name -> return addToTheChildren(toAdd)
-            else -> childrenNodes.forEach { it -> it.insert(toAdd) }
+            checkIfInsertIsManagerOf(valueNode) -> return placeAtTheTopOfTheTree(toAdd)
+            checkIfInsertIsChildOf(valueNode) -> return addToTheChildren(toAdd)
+            else -> childrenNodes.forEach { it -> it.insert(toAdd, checkIfInsertIsManagerOf, checkIfInsertIsChildOf) }
         }
         return this
     }
@@ -39,11 +39,11 @@ class PopulatedTreeNode(private val valueNode: Person,
         return this
     }
 
-    override fun findInTree(name: String): TreeNode? {
+    override fun findInTree(checkName: (Person) -> Boolean): TreeNode? {
         return when {
-            value().name == name -> this
+            checkName(valueNode) -> this
             childrenNodes.isEmpty() -> null
-            else -> childrenNodes.firstOrNull { it -> it.findInTree(name) != null }
+            else -> childrenNodes.firstOrNull { it -> it.findInTree(checkName) != null }
         }
     }
 

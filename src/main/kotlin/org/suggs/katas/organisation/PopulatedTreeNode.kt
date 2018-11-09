@@ -1,8 +1,8 @@
 package org.suggs.katas.organisation
 
 class PopulatedTreeNode<T>(private val valueNode: T,
-                        private var parentNode: TreeNode<T>?,
-                        private var childrenNodes: List<TreeNode<T>> = ArrayList()) : TreeNode<T> {
+                           private var parentNode: TreeNode<T>?,
+                           private var childrenNodes: List<PopulatedTreeNode<T>> = ArrayList()) : TreeNode<T> {
 
     override fun isEmpty(): Boolean = false
 
@@ -49,6 +49,16 @@ class PopulatedTreeNode<T>(private val valueNode: T,
 
     override fun treeCount(): Int {
         return 1 + childrenNodes.sumBy { it -> it.treeCount() }
+    }
+
+    override fun toString(): String {
+        return delegatedToString(1, StringBuilder())
+    }
+
+    fun delegatedToString(level: Int, treeView: StringBuilder): String {
+        treeView.append(" ".repeat(level * 4) + "-" + valueNode.toString() + "\n")
+        childrenNodes.forEach { it -> it.delegatedToString(level + 1, treeView) }
+        return treeView.toString()
     }
 
 }

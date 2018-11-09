@@ -15,7 +15,7 @@ We need to help our big friendly senior manager to visualise the data of people 
 
 ### Requirements
 1. Can read people information from a CSV with details of "Name", "Rank", "Manager", "Engineer", "Committer"
-1. Create a tree with lots of people, who all have a manager also in the tree (except this one guy).  Note the data 
+1. Can create a tree with lots of people, who all have a manager also in the tree (except this one guy).  Note the data 
 will not be in order so tree partitioning must be avoided.
 1. Can print the tree to a logger
 1. Can use dot notation to visualise the graph in different ways:

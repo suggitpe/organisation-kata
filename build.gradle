@@ -26,11 +26,14 @@ repositories {
 }
 
 dependencies {
-    compile libs.kotlin
+    compile libs.kotlin,
+            libs.slf4j,
+            libs.opencsv
 
     testImplementation libs.test.junitApi,
             libs.test.assertj
 
-    testRuntimeOnly libs.test.junitEngine
+    testRuntimeOnly libs.test.junitEngine,
+        libs.logback
 }
 

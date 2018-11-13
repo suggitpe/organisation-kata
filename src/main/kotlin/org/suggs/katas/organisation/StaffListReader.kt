@@ -16,7 +16,7 @@ class StaffListReader {
             return buildListOfStaffFrom(staffData.drop(1), ArrayList())
         }
 
-        private fun buildListOfStaffFrom(staffData: List<String>, listOfPeople: List<Person>): List<Person> {
+        private tailrec fun buildListOfStaffFrom(staffData: List<String>, listOfPeople: List<Person>): List<Person> {
             return when {
                 staffData.isEmpty() -> listOfPeople
                 else -> buildListOfStaffFrom(staffData.drop(1), addToList(listOfPeople, staffData.first()))

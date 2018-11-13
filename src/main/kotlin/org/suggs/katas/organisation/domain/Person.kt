@@ -2,6 +2,7 @@ package org.suggs.katas.organisation.domain
 
 data class Person(val name: String,
                   val manager: String,
+                  val rank: String = "N/A",
                   val engineer: Boolean = false,
                   val committer: Boolean = false) {
 
@@ -12,8 +13,10 @@ data class Person(val name: String,
 
     fun withAManagerCalled(managerName: String): Person = Person(name, managerName)
 
-    fun thatCommits(doTheyCommit: Boolean): Person = Person(name, manager, engineer, doTheyCommit)
+    fun withARankOf(theirRank: String): Person = Person(name, manager, theirRank, engineer, committer)
 
-    fun thatIsAnEngineer(areTheyAnEngineer: Boolean): Person = Person(name, manager, areTheyAnEngineer, committer)
+    fun thatCommits(doTheyCommit: Boolean): Person = Person(name, manager, rank, engineer, doTheyCommit)
+
+    fun thatIsAnEngineer(areTheyAnEngineer: Boolean): Person = Person(name, manager, rank, areTheyAnEngineer, committer)
 
 }

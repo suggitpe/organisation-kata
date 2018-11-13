@@ -12,13 +12,13 @@ class OrganisationTreeTest {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    private val pete = someoneCalled("Pete").withAManagerCalled("Paul").thatIsAnEngineer(true).thatCommits(true)
-    private val jack = someoneCalled("Jack").withAManagerCalled("Pete").thatIsAnEngineer(true).thatCommits(true)
-    private val dale = someoneCalled("Dale").withAManagerCalled("Pete").thatIsAnEngineer(true).thatCommits(false)
-    private val bert = someoneCalled("Bert").withAManagerCalled("Dale").thatIsAnEngineer(false).thatCommits(false)
-    private val josh = someoneCalled("Josh").withAManagerCalled("Pete").thatIsAnEngineer(true).thatCommits(false)
-    private val john = someoneCalled("John").withAManagerCalled("Bert").thatIsAnEngineer(true).thatCommits(false)
-    private val nick = someoneCalled("Nick").withAManagerCalled("John").thatIsAnEngineer(false).thatCommits(false)
+    private val pete = someoneCalled("Pete").withAManagerCalled("Paul")
+    private val jack = someoneCalled("Jack").withAManagerCalled("Pete")
+    private val dale = someoneCalled("Dale").withAManagerCalled("Pete")
+    private val bert = someoneCalled("Bert").withAManagerCalled("Dale")
+    private val josh = someoneCalled("Josh").withAManagerCalled("Pete")
+    private val john = someoneCalled("John").withAManagerCalled("Bert")
+    private val nick = someoneCalled("Nick").withAManagerCalled("John")
 
     private val everyone = listOf(pete, jack, dale, bert, josh, john, nick)
 

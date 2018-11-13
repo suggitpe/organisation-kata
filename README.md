@@ -2,7 +2,7 @@
 
 -----
 ## Background
-Some very senior manager in an office far far away wants to know how many people in his organisation are committing 
+A very senior manager in an office far far away wants to know how many people in his organisation are committing 
 code and how many are not.  He is also concerned that people who are committing code may be listed as non-engineers.
 He is trying to ensure that in his organisation we have plenty of people who are writing code (its an IT organisation 
 after all).
@@ -11,7 +11,7 @@ He needs your help!  He has a huge spreadsheet of people with people data but ca
 
 ----
 ## Instructions
-We need to help our big friendly senior manager to visualise the data of people in 
+We need to help our big friendly senior manager to visualise the data of people in his organisation.  We have a list of people ordered by rank 
 
 ### Requirements
 1. Can read people information from a CSV with details of "Name", "Rank", "Manager", "Engineer", "Committer"

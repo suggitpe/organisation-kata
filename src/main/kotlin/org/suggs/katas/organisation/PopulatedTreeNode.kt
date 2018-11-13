@@ -55,7 +55,7 @@ class PopulatedTreeNode<T>(private val valueNode: T,
         return delegatedToString(1, StringBuilder())
     }
 
-    fun delegatedToString(level: Int, treeView: StringBuilder): String {
+    private fun delegatedToString(level: Int, treeView: StringBuilder): String {
         treeView.append(" ".repeat(level * 4) + "-" + valueNode.toString() + "\n")
         childrenNodes.forEach { it -> it.delegatedToString(level + 1, treeView) }
         return treeView.toString()

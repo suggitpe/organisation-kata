@@ -10,7 +10,7 @@ class OrganisationTreeBuilder {
             return buildOrganisationTreeFrom(staff, EmptyTreeNode(noOne()))
         }
 
-        private fun buildOrganisationTreeFrom(staff: List<Person>, tree: TreeNode<Person>): TreeNode<Person> {
+        private tailrec fun buildOrganisationTreeFrom(staff: List<Person>, tree: TreeNode<Person>): TreeNode<Person> {
             return when {
                 staff.isEmpty() -> tree
                 else -> {
@@ -24,7 +24,6 @@ class OrganisationTreeBuilder {
             return Person("", "")
         }
     }
-
 }
 
 private class EmptyTreeNode<T>(private val value: T) : TreeNode<T> {

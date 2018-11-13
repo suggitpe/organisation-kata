@@ -1,6 +1,6 @@
-Name,Manager,Engineer,Committer
-Pete,Paul,TRUE,TRUE
-Dale,Pete,TRUE,FALSE
-Jack,Pete,TRUE,TRUE
-Bert,Dale,FALSE,FALSE
-josh,Pete,TRUE,TRUE
+Name,Manager,Rank, Engineer,Committer
+Pete,Paul,D,TRUE,TRUE
+Dale,Pete,VP,TRUE,FALSE
+Jack,Pete,D,TRUE,TRUE
+Bert,Dale,VP,FALSE,FALSE
+Josh,Pete,VP,TRUE,TRUE

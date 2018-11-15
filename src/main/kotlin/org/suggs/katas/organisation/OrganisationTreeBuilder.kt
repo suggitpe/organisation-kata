@@ -58,4 +58,8 @@ private class EmptyTreeNode<T>(private val value: T) : TreeNode<T> {
         return "EMPTY TREE"
     }
 
+    override fun executeOverTree(doSometing: (T) -> String): String {
+        return ""
+    }
+
 }

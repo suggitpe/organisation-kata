@@ -15,4 +15,6 @@ interface TreeNode<T> {
     fun treeCount(): Int
 
     fun findInTree(checkName: (T) -> Boolean): TreeNode<T>?
+
+    fun executeOverTree( doSometing: (T) -> String ): String
 }

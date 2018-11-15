@@ -61,4 +61,9 @@ class PopulatedTreeNode<T>(private val valueNode: T,
         return treeView.toString()
     }
 
+    override fun executeOverTree(doSometing: (T) -> String): String {
+        return doSometing(valueNode) + childrenNodes.map { it -> it.executeOverTree(doSometing) }.joinToString("")
+    }
+
+
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.function.Executable
 import org.slf4j.LoggerFactory
 import org.suggs.katas.organisation.OrganisationTreeBuilder.Companion.buildOrganisationTreeFrom
+import org.suggs.katas.organisation.StaffListReader.Companion.readListOfStaff
 import org.suggs.katas.organisation.domain.Person.Companion.someoneCalled
 
 class OrganisationTreeTest {
@@ -20,7 +21,7 @@ class OrganisationTreeTest {
     private val john = someoneCalled("John").withAManagerCalled("Bert")
     private val nick = someoneCalled("Nick").withAManagerCalled("John")
 
-    private val everyone = listOf(pete, jack, dale, bert, josh, john, nick)
+    private val everyone = listOf(jack, pete, dale, bert, josh, john, nick)
 
     @Test
     fun `can be dumped to a string`() {
@@ -108,12 +109,22 @@ class OrganisationTreeTest {
     fun `can find someone in a deeply nested tree`() {
         val tree = buildOrganisationTreeFrom(everyone)
         assertAll("Should find people in the tree",
+                Executable { assertThat(tree.treeCount()).isEqualTo(7) },
                 Executable { assertThat(tree.findInTree { it -> it.name == pete.name }).`as`("pete not found").isNotNull },
                 Executable { assertThat(tree.findInTree { it -> it.name == jack.name }).`as`("jack not found").isNotNull },
                 Executable { assertThat(tree.findInTree { it -> it.name == dale.name }).`as`("dale not found").isNotNull },
                 Executable { assertThat(tree.findInTree { it -> it.name == bert.name }).`as`("bert not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == josh.name }).`as`("josh not found").isNotNull }
+                Executable { assertThat(tree.findInTree { it -> it.name == josh.name }).`as`("josh not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == john.name }).`as`("john not found").isNotNull },
+                Executable { assertThat(tree.findInTree { it -> it.name == nick.name }).`as`("nick not found").isNotNull }
         )
+    }
+
+    @Test
+    fun `can read staff from a file into a tree`(){
+        val staffList = readListOfStaff("ListOfStaff.csv")
+        val tree = buildOrganisationTreeFrom(staffList)
+        assertThat(staffList.size == tree.treeCount())
     }
 }
 

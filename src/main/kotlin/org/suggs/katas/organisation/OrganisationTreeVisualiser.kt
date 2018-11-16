@@ -18,21 +18,22 @@ class OrganisationTreeVisualiser {
             return """(${someone.manager}) <-- (${someone.name}) ${"\n"}"""
         }
 
+
         fun visualiseCommitterTree(tree: TreeNode<Person>): String {
             return "\n@startuml\n" + tree.executeOverTree { person -> visualisePersonObject(person) } + tree.executeOverTree { person -> visualisePersonRelationship(person) } + "\n@enduml"
         }
 
         private fun visualisePersonObject(someone: Person): String {
-            return """object ${someone.name} #${guageColourFor(someone)}{
-    rank = ${someone.rank}
+            return """usecase ${someone.name} #${guageColourFor(someone)} as "${someone.name} (${someone.rank})
+    ---
     committer = ${someone.committer}
     engineer = ${someone.engineer}
-} ${"\n"}
+" ${"\n"}
 """.trimIndent()
         }
 
         private fun guageColourFor(someone: Person): String {
-            return when{
+            return when {
                 someone.committer == someone.engineer -> "lightgreen"
                 !someone.committer && someone.engineer -> "red"
                 else -> "pink"
@@ -40,11 +41,11 @@ class OrganisationTreeVisualiser {
         }
 
         private fun visualisePersonRelationship(someone: Person): String {
-            return """${someone.manager} <-- ${someone.name} ${"\n"}"""
+            return """(${someone.manager}) <-- (${someone.name}) ${"\n"}"""
         }
 
         fun writePumlToFile(puml: String) {
-            File(buildFileForOutput()).bufferedWriter().use { out -> out.write(puml) }
+            return File(buildFileForOutput()).bufferedWriter().use { out -> out.write(puml) }
         }
 
         private fun buildFileForOutput(): String {

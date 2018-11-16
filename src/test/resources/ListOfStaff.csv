@@ -1,0 +1,10 @@
+Name  ,Manager,Rank,Engineer,Committer
+Paul  ,Scott  ,MD  ,FALSE   ,FALSE
+Pete  ,Paul   ,D   ,TRUE    ,TRUE
+Dale  ,Pete   ,VP  ,TRUE    ,FALSE
+Jack  ,Pete   ,D   ,TRUE    ,TRUE
+Gemma ,Pete   ,ext ,FALSE   ,FALSE
+Phil  ,Pete   ,VP  ,TRUE    ,TRUE
+Stuart,Paul   ,D   ,FALSE   ,FALSE
+Nick  ,Paul   ,MD  ,FALSE   ,FALSE
+Tim   ,Paul   ,D   ,TRUE    ,FALSE

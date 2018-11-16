@@ -8,9 +8,9 @@ class StaffListReaderTest {
 
     @Test
     fun `read from a csv to create a list of staff`() {
-        val staff = readListOfStaff("ListOf5Staff.csv")
-        assertThat(staff.size).isEqualTo(5)
-        assertThat(staff.first().name).isEqualTo("Pete")
+        val staff = readListOfStaff("ListOfStaff.csv")
+        assertThat(staff.size).isEqualTo(9)
+        assertThat(staff.first().name).isEqualTo("Paul")
     }
 
 }

@@ -29,10 +29,11 @@ class StaffListReader {
 
         private fun buildPersonFrom(lineFromFile: String): Person {
             val personData = lineFromFile.split(",")
-            return someoneCalled(personData[0])
-                    .withAManagerCalled(personData[1])
-                    .thatIsAnEngineer(personData[2].toBoolean())
-                    .thatCommits(personData[3].toBoolean())
+            return someoneCalled(personData[0].trim())
+                    .withAManagerCalled(personData[1].trim())
+                    .withARankOf(personData[2].trim())
+                    .thatIsAnEngineer(personData[3].trim().toBoolean())
+                    .thatCommits(personData[4].trim().toBoolean())
         }
 
     }

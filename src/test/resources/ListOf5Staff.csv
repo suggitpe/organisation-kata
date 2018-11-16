@@ -1,6 +1,0 @@
-Name,Manager,Rank, Engineer,Committer
-Pete,Paul,D,TRUE,TRUE
-Dale,Pete,VP,TRUE,FALSE
-Jack,Pete,D,TRUE,TRUE
-Bert,Dale,VP,FALSE,FALSE
-Josh,Pete,VP,TRUE,TRUE

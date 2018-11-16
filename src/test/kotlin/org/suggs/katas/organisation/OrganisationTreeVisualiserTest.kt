@@ -16,6 +16,7 @@ class OrganisationTreeVisualiserTest {
 
     private fun buildOrganisationTree(): TreeNode<Person> {
         return buildOrganisationTreeFrom(listOf(
+                someoneCalled("Paul").withAManagerCalled("Scott").withARankOf("MD").thatCommits(true).thatIsAnEngineer(true),
                 someoneCalled("Pete").withAManagerCalled("Paul").withARankOf("D").thatCommits(true).thatIsAnEngineer(true),
                 someoneCalled("Jack").withAManagerCalled("Pete").withARankOf("D").thatCommits(true).thatIsAnEngineer(true),
                 someoneCalled("Dale").withAManagerCalled("Pete").withARankOf("VP").thatCommits(false).thatIsAnEngineer(true),
@@ -38,7 +39,12 @@ class OrganisationTreeVisualiserTest {
     }
 
     @Test
-    fun `visualisesTreeIntoFile`() {
+    fun `visualise simple tree to file`(){
+        writePumlToFile(visualiseSimpleTree(tree))
+    }
+
+    @Test
+    fun `visualise committer tree into file`() {
         writePumlToFile(visualiseCommitterTree(tree))
     }
 }

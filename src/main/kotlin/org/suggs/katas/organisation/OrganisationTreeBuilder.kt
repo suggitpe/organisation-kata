@@ -15,7 +15,7 @@ class OrganisationTreeBuilder {
                 staff.isEmpty() -> tree
                 else -> {
                     val toAdd = staff.first()
-                    buildOrganisationTreeFrom(staff.drop(1), tree.insert(toAdd, { it -> it.manager == toAdd.name }, { it -> it.name == toAdd.manager }))
+                    buildOrganisationTreeFrom(staff.drop(1), tree.insert(toAdd, { it.manager == toAdd.name }, { it.name == toAdd.manager }))
                 }
             }
         }
@@ -58,7 +58,7 @@ private class EmptyTreeNode<T>(private val value: T) : TreeNode<T> {
         return "EMPTY TREE"
     }
 
-    override fun executeOverTree(doSometing: (T) -> String): String {
+    override fun executeOverTree(doSomething: (T) -> String): String {
         return ""
     }
 

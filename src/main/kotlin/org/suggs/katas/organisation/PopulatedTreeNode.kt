@@ -22,7 +22,7 @@ class PopulatedTreeNode<T>(private val valueNode: T,
         when {
             checkIfInsertIsManagerOf(valueNode) -> return placeAtTheTopOfTheTree(toAdd)
             checkIfInsertIsChildOf(valueNode) -> return addToTheChildren(toAdd)
-            else -> childrenNodes.forEach { it -> it.insert(toAdd, checkIfInsertIsManagerOf, checkIfInsertIsChildOf) }
+            else -> childrenNodes.forEach { it.insert(toAdd, checkIfInsertIsManagerOf, checkIfInsertIsChildOf) }
         }
         return this
     }
@@ -43,12 +43,12 @@ class PopulatedTreeNode<T>(private val valueNode: T,
         return when {
             checkName(valueNode) -> this
             childrenNodes.isEmpty() -> null
-            else -> childrenNodes.firstOrNull { it -> it.findInTree(checkName) != null }
+            else -> childrenNodes.firstOrNull { it.findInTree(checkName) != null }
         }
     }
 
     override fun treeCount(): Int {
-        return 1 + childrenNodes.sumBy { it -> it.treeCount() }
+        return 1 + childrenNodes.sumBy { it.treeCount() }
     }
 
     override fun toString(): String {
@@ -57,12 +57,12 @@ class PopulatedTreeNode<T>(private val valueNode: T,
 
     private fun delegatedToString(level: Int, treeView: StringBuilder): String {
         treeView.append(" ".repeat(level * 4) + "-" + valueNode.toString() + "\n")
-        childrenNodes.forEach { it -> it.delegatedToString(level + 1, treeView) }
+        childrenNodes.forEach { it.delegatedToString(level + 1, treeView) }
         return treeView.toString()
     }
 
-    override fun executeOverTree(doSometing: (T) -> String): String {
-        return doSometing(valueNode) + childrenNodes.map { it -> it.executeOverTree(doSometing) }.joinToString("")
+    override fun executeOverTree(doSomething: (T) -> String): String {
+        return doSomething(valueNode) + childrenNodes.map { it.executeOverTree(doSomething) }.joinToString("")
     }
 
 

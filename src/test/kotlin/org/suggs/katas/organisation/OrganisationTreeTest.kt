@@ -1,17 +1,21 @@
 package org.suggs.katas.organisation
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertAll
+import org.assertj.core.api.JUnitJupiterSoftAssertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.function.Executable
+import org.junit.jupiter.api.extension.RegisterExtension
 import org.slf4j.LoggerFactory
 import org.suggs.katas.organisation.OrganisationTreeBuilder.Companion.buildOrganisationTreeFrom
 import org.suggs.katas.organisation.StaffListReader.Companion.readListOfStaff
 import org.suggs.katas.organisation.domain.Person.Companion.someoneCalled
 
+
 class OrganisationTreeTest {
 
     private val log = LoggerFactory.getLogger(javaClass)
+
+    @RegisterExtension
+    val softly = JUnitJupiterSoftAssertions()
 
     private val pete = someoneCalled("Pete").withAManagerCalled("Paul")
     private val jack = someoneCalled("Jack").withAManagerCalled("Pete")
@@ -50,29 +54,29 @@ class OrganisationTreeTest {
     @Test
     fun `builds an organisation tree of one person when passed a person`() {
         val tree = buildOrganisationTreeFrom(listOf(pete))
-        assertThat(tree.treeCount()).isEqualTo(1)
-        assertThat(tree.value()).isEqualTo(pete)
+        softly.assertThat(tree.treeCount()).isEqualTo(1)
+        softly.assertThat(tree.value()).isEqualTo(pete)
     }
 
     @Test
     fun `builds an organisation tree of two people`() {
         val tree = buildOrganisationTreeFrom(listOf(pete, jack))
-        assertThat(tree.treeCount()).isEqualTo(2)
-        assertThat(tree.value()).isEqualTo(pete)
+        softly.assertThat(tree.treeCount()).isEqualTo(2)
+        softly.assertThat(tree.value()).isEqualTo(pete)
     }
 
     @Test
     fun `correctly places people in the tree when they are out of order`() {
         val tree = buildOrganisationTreeFrom(listOf(jack, pete))
-        assertThat(tree.treeCount()).isEqualTo(2)
-        assertThat(tree.value()).isEqualTo(pete)
+        softly.assertThat(tree.treeCount()).isEqualTo(2)
+        softly.assertThat(tree.value()).isEqualTo(pete)
     }
 
     @Test
     fun `builds an organisation tree of three layers`() {
         val tree = buildOrganisationTreeFrom(everyone)
-        assertThat(tree.treeCount()).isEqualTo(7)
-        assertThat(tree.value()).isEqualTo(pete)
+        softly.assertThat(tree.treeCount()).isEqualTo(7)
+        softly.assertThat(tree.value()).isEqualTo(pete)
     }
 
     @Test
@@ -108,20 +112,18 @@ class OrganisationTreeTest {
     @Test
     fun `can find someone in a deeply nested tree`() {
         val tree = buildOrganisationTreeFrom(everyone)
-        assertAll("Should find people in the tree",
-                Executable { assertThat(tree.treeCount()).isEqualTo(7) },
-                Executable { assertThat(tree.findInTree { it -> it.name == pete.name }).`as`("pete not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == jack.name }).`as`("jack not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == dale.name }).`as`("dale not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == bert.name }).`as`("bert not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == josh.name }).`as`("josh not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == john.name }).`as`("john not found").isNotNull },
-                Executable { assertThat(tree.findInTree { it -> it.name == nick.name }).`as`("nick not found").isNotNull }
-        )
+        softly.assertThat(tree.treeCount()).isEqualTo(7)
+        softly.assertThat(tree.findInTree { it.name == pete.name }).`as`("pete not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == jack.name }).`as`("jack not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == dale.name }).`as`("dale not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == bert.name }).`as`("bert not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == josh.name }).`as`("josh not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == john.name }).`as`("john not found").isNotNull
+        softly.assertThat(tree.findInTree { it.name == nick.name }).`as`("nick not found").isNotNull
     }
 
     @Test
-    fun `can read staff from a file into a tree`(){
+    fun `can read staff from a file into a tree`() {
         val staffList = readListOfStaff("ListOfStaff.csv")
         val tree = buildOrganisationTreeFrom(staffList)
         assertThat(staffList.size == tree.treeCount())

@@ -16,5 +16,5 @@ interface TreeNode<T> {
 
     fun findInTree(checkName: (T) -> Boolean): TreeNode<T>?
 
-    fun executeOverTree( doSometing: (T) -> String ): String
+    fun executeOverTree(doSomething: (T) -> String ): String
 }

@@ -13,13 +13,15 @@ class StaffListReader {
         }
 
         private fun buildListOfStaffFrom(staffData: List<String>): List<Person> {
-            return buildListOfStaffFrom(staffData.drop(1), ArrayList())
+            return buildListOfStaffFrom(removeHeadFrom(staffData), ArrayList())
         }
+
+        private fun removeHeadFrom(staffData: List<String>) = staffData.drop(1)
 
         private tailrec fun buildListOfStaffFrom(staffData: List<String>, listOfPeople: List<Person>): List<Person> {
             return when {
                 staffData.isEmpty() -> listOfPeople
-                else -> buildListOfStaffFrom(staffData.drop(1), addToList(listOfPeople, staffData.first()))
+                else -> buildListOfStaffFrom(removeHeadFrom(staffData), addToList(listOfPeople, staffData.first()))
             }
         }
 
@@ -28,7 +30,10 @@ class StaffListReader {
         }
 
         private fun buildPersonFrom(lineFromFile: String): Person {
-            val personData = lineFromFile.split(",")
+            return buildPersonFrom(lineFromFile.split(","))
+        }
+
+        private fun buildPersonFrom(personData: List<String>): Person {
             return someoneCalled(personData[0].trim())
                     .withAManagerCalled(personData[1].trim())
                     .withARankOf(personData[2].trim())

@@ -10,9 +10,7 @@ class OrganisationTreeAcceptanceTest {
 
     @Test
     fun `read staff list and generate organisation tree`() {
-        writePumlToFile(
-                visualiseCommitterTree(
-                        buildOrganisationTreeFrom(
-                                readListOfStaff("ListOfStaff.csv"))))
+        val tree = buildOrganisationTreeFrom(readListOfStaff("ListOfStaff.csv"))
+        writePumlToFile(visualiseCommitterTree(tree))
     }
 }

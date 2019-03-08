@@ -26,25 +26,21 @@ class OrganisationTreeVisualiserTest {
         ))
     }
 
-    @Test
-    fun `visualise simple tree of people`() {
+    @Test fun `visualise simple tree of people`() {
         val treeVisualisation = visualiseSimpleTree(tree)
         log.info(treeVisualisation)
     }
 
-    @Test
-    fun `visualise committer tree of people`() {
+    @Test fun `visualise committer tree of people`() {
         val treeVisualisation = visualiseCommitterTree(tree)
         log.info(treeVisualisation)
     }
 
-    @Test
-    fun `visualise simple tree to file`(){
+    @Test fun `visualise simple tree to file`() {
         writePumlToFile(visualiseSimpleTree(tree))
     }
 
-    @Test
-    fun `visualise committer tree into file`() {
+    @Test fun `visualise committer tree into file`() {
         writePumlToFile(visualiseCommitterTree(tree))
     }
 }

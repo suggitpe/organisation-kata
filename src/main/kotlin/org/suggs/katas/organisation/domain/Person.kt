@@ -7,7 +7,6 @@ data class Person(val name: String,
                   val committer: Boolean = false) {
 
     companion object {
-
         fun someoneCalled(named: String): Person = Person(named, "")
     }
 

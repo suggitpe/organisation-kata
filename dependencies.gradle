@@ -1,7 +1,7 @@
 ext {
     libs = [
 
-            kotlin : 'org.jetbrains.kotlin:kotlin-stdlib:1.3.10',
+            kotlin : 'org.jetbrains.kotlin:kotlin-stdlib:1.3.41',
             opencsv: 'com.opencsv:opencsv:4.3.2',
 
             slf4j  : 'org.slf4j:slf4j-api:1.7.25',
